@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+/*import { test, expect } from '@playwright/test';
 
 // Annotate the entire file as serial.
 test.describe.serial('Feature Mesh Tests', () => {
@@ -14,8 +14,15 @@ test.describe.serial('Feature Mesh Tests', () => {
 
  test.afterAll(async () => {
     await page.close();
- });
- 
+ });*/
+ import { test, expect, Page } from '@playwright/test';
+
+  test.describe('test', async () => {
+  let page: Page;
+  test.beforeAll(async ({ browser }) => {
+    page = await browser.newPage();
+  });
+
 
  test('sign in', async () => {
     console.log('E2E test log of feature mesh website\n');
@@ -33,7 +40,7 @@ test.describe.serial('Feature Mesh Tests', () => {
     console.log('SignIn - successful');
  });
 
- test('NavBar visibility', async ({ page }) => {
+ test('NavBar visibility', async () => {
     console.log('\nTesting NavBar');
     await page.getByText('FeatureMeshHomePublishSearch');
     await page.waitForTimeout(3000);
@@ -47,7 +54,7 @@ test.describe.serial('Feature Mesh Tests', () => {
     console.log('Logout button - visible');
    });
 
-   test('Number matrix visibility', async ({ page }) => {
+   test('Number matrix visibility', async () => {
     console.log('\nTesting number matrix!!');
     await expect(page.locator('.Analytics_rectangle29__-8ZNb')).toBeVisible();
     await expect(page.locator('.Analytics_line3__8OOUm')).toBeVisible();
@@ -57,7 +64,7 @@ test.describe.serial('Feature Mesh Tests', () => {
     console.log('Number matrix - visible');
    });
 
-   test('Navigation to Publish page', async ({ page }) => {
+   test('Navigation to Publish page', async () => {
     await page.getByRole('link', { name: 'Publish' }).click();
     await expect(page).toHaveURL('https://red-island-097e05210.4.azurestaticapps.net/publish');
     console.log('\nNavigation to Publish page - successful');
@@ -68,7 +75,7 @@ test.describe.serial('Feature Mesh Tests', () => {
     console.log('NavBar visibility test - successful');
    });
 
-   test('Entity button functionality', async ({ page }) => {
+   test('Entity button functionality', async () => {
     console.log('\nTesting Entity button');
     await expect(page.locator('div').filter({ hasText: /^EntityFeatureValues$/ })).toBeVisible();
     await expect(page.getByText('Entity', { exact: true })).toBeVisible();
@@ -94,7 +101,7 @@ test.describe.serial('Feature Mesh Tests', () => {
     console.log('Creating entity - successful');
    });
 
-   test('Feature button functionality', async ({ page }) => {
+   test('Feature button functionality', async () => {
     console.log('\nTesting Feature button');
     await page.getByText('Feature', { exact: true }).click();
     await expect(page.locator('div').filter({ hasText: /^Select Entity IdEntity Id:Set$/ }).nth(1)).toBeVisible();
@@ -123,7 +130,7 @@ test.describe.serial('Feature Mesh Tests', () => {
     console.log('Submitting Feature - successful');
    });
    
-   test('Search feature functionality', async ({ page }) => {
+   test('Search feature functionality', async () => {
     console.log('Testing Search feature');
     await page.getByRole('link', { name: 'Search' }).click();
     await expect(page).toHaveURL('https://red-island-097e05210.4.azurestaticapps.net/search');
