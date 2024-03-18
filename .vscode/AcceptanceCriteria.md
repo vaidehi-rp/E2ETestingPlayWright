@@ -177,5 +177,3 @@ A data scientist, I want to publish a Feature manually to the Feature Mesh
     And clicks the download button
     Then the selected feature should be downloaded in the chosen file format
     And a success message should be displayed
-
-
